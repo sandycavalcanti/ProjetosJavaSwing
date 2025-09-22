@@ -18,7 +18,6 @@ public class JavaBD01 {
         
         PessoaDAO pDAO = new PessoaDAO();
         pDAO.inserir(p);
-        
     }
 
 } // fim da classe

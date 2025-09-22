@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /*
@@ -38,8 +39,49 @@ public class PessoaDAO {
         }
     }
     
+    public Pessoa getPessoa(int id){
+        String sql = "select * from Pessoa where id = ?";
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Pessoa p = new Pessoa();
+            rs.first();
+            p.setId(id);
+            p.setNome(rs.getString("nome"));
+            p.setSexo(rs.getNString("sexo"));
+            p.setIdioma(rs.getNString("idioma"));
+            return p;
+        } catch(SQLException ex){
+            System.out.println("Erro ao consultar pessoa: "+ex.getMessage());
+            return null;
+        }
+    }
     
+    public void editarPessoa(Pessoa p){
+        try{
+        String sql = "UPDATE Pessoa set nome=?, sexo=?, idioma=? WHERE id=?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, p.getNome());
+        stmt.setString(2, p.getSexo());
+        stmt.setString(3, p.getIdioma());
+        stmt.setInt(4, p.getId());
+        stmt.execute();
+        } catch (SQLException ex){
+            System.out.println("Erro ao atualiizar pessoa: "+ex.getMessage());
+        }
+    }
     
-
-
+    public void excluirPessoa(int id){
+        try{
+            String sql = "delete from Pessoa WHERE id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao excluir pessoa: "+ex.getMessage());
+        }
+        
+    }
+    
 } // fim da classe
