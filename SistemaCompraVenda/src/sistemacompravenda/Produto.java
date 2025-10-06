@@ -16,6 +16,12 @@ public class Produto {
     float preco;
     int quantidade;
     int fornecedorId;
+    
+        @Override
+    public String toString() {
+        return this.getNome();
+    }
+
 
     public int getId() {
         return id;
@@ -63,6 +69,10 @@ public class Produto {
 
     public void setFornecedorId(int fornecedorId) {
         this.fornecedorId = fornecedorId;
+    }
+
+    void setFornecedorId(Fornecedor f) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

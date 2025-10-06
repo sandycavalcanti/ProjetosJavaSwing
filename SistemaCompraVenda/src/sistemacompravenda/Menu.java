@@ -30,9 +30,12 @@ public class Menu extends javax.swing.JFrame {
         btnCadCliente = new javax.swing.JButton();
         btnCadProduto = new javax.swing.JButton();
         btnLancarNota = new javax.swing.JButton();
+        btnCadFornecedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnCadCliente.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadCliente.setForeground(new java.awt.Color(255, 255, 255));
         btnCadCliente.setText("Cadastrar cliente");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,6 +43,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnCadProduto.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnCadProduto.setText("Cadastrar produto");
         btnCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,42 +52,86 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnLancarNota.setBackground(new java.awt.Color(0, 102, 102));
+        btnLancarNota.setForeground(new java.awt.Color(255, 255, 255));
         btnLancarNota.setText("Lançar nota");
+        btnLancarNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLancarNotaActionPerformed(evt);
+            }
+        });
+
+        btnCadFornecedor.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadFornecedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadFornecedor.setText("Cadastrar fornecedor");
+        btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadFornecedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLancarNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLancarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadProduto)
+                    .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadCliente, btnCadProduto, btnLancarNota});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(btnCadCliente)
+                .addContainerGap()
+                .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCadProduto)
                 .addGap(18, 18, 18)
                 .addComponent(btnLancarNota)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadCliente, btnCadProduto, btnLancarNota});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
-        // TODO add your handling code here:
+        CadCliente tela = new CadCliente();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose(); 
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void btnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdutoActionPerformed
-        // TODO add your handling code here:
+        CadProduto tela = new CadProduto();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose(); 
     }//GEN-LAST:event_btnCadProdutoActionPerformed
+
+    private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
+        CadFornecedor tela = new CadFornecedor();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose(); 
+    }//GEN-LAST:event_btnCadFornecedorActionPerformed
+
+    private void btnLancarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancarNotaActionPerformed
+        CadNota tela = new CadNota();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose(); 
+    }//GEN-LAST:event_btnLancarNotaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +170,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
+    private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCadProduto;
     private javax.swing.JButton btnLancarNota;
     // End of variables declaration//GEN-END:variables

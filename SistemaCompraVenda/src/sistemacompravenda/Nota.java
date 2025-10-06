@@ -16,6 +16,11 @@ public class Nota {
     int clienteId;
     int fornecedorId;
     int produtoId;
+    
+            @Override
+    public String toString() {
+        return this.getId()+" - "+getData(); 
+    }
 
     public int getId() {
         return id;

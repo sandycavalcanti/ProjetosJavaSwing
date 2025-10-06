@@ -2,7 +2,10 @@ package sistemacompravenda;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,8 +34,38 @@ public class NotaDAO {
             stmt.execute();
         }
         catch(SQLException ex){
-            System.out.println("Erro ao inserir pessoa: "+ex.getMessage());
+            System.out.println("Erro ao inserir notas: "+ex.getMessage());
         }
     }
+    
+    public List<Nota> listarNota(){
+          List<Nota> lista = new ArrayList<>();
+        String sql = "SELECT * FROM NOTA";
+        
+        try{
+            PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery();
+            
+            
+            while(rs.next()){
+                Nota n = new Nota();
+                n.setId(rs.getInt("NOTA_CODIGO"));
+                n.setQuantidade(rs.getInt("NOTA_QUANTIDADE"));
+                n.setData(rs.getString("NOTA_DATA"));
+                n.setClienteId(rs.getInt("CLIENTE_ID"));
+                n.setProdutoId(rs.getInt("PRODUTO_ID"));
+                n.setFornecedorId(rs.getInt("FORNECEDOR_ID"));
+                
+                lista.add(n);
+            }
+            return lista;
+        }catch (SQLException ex) {
+            System.out.println("Erro ao listar as notas: " + ex.getMessage());
+            return null;
+        }
+        
+    }
+    
+    
 }
 
