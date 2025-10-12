@@ -9,10 +9,6 @@ package sistemacompravenda;
  * @author 2830482411008
  */
 public class Menu extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
     }

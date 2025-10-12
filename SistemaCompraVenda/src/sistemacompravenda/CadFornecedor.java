@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  */
 public class CadFornecedor extends javax.swing.JFrame {
     
-    
     private void LimparForm(){
         txtID.setText("");
         txtNome.setText("");
@@ -31,7 +30,6 @@ public class CadFornecedor extends javax.swing.JFrame {
         txtNumero.setText("");
         cmbUF.setSelectedIndex(0);
     }
-    
     private void Listar(){
         FornecedorDAO fDAO = new FornecedorDAO();
         List<Fornecedor> fornecedores = fDAO.listarFornecedores();
@@ -42,16 +40,11 @@ public class CadFornecedor extends javax.swing.JFrame {
         });
         lstFornecedor.setModel(model);
     }
-
-    /**
-     * Creates new form cadFornecedor
-     */
     public CadFornecedor() {
         initComponents();
         Listar();
         txtID.setEditable(false);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -540,7 +533,6 @@ public class CadFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
         Fornecedor f = new Fornecedor();
         f.setNome(txtNome.getText());
         f.setNomeFantasia(txtNomeFantasia.getText());
@@ -554,7 +546,6 @@ public class CadFornecedor extends javax.swing.JFrame {
         f.setNumero(Integer.parseInt(txtNumero.getText()));
         f.setComplemento(txtComplemento.getText());
         f.setTelefone(txtTelefone.getText());
-        
         FornecedorDAO fDAO = new FornecedorDAO();
         fDAO.inserirFornecedor(f);
         LimparForm();
@@ -583,8 +574,6 @@ public class CadFornecedor extends javax.swing.JFrame {
             txtNumero.setText(String.valueOf(f.getNumero()));
             txtComplemento.setText(f.getComplemento());
             txtCNPJ.setText(f.getCnpj());
-            
-            
             String uf = f.getUf().trim().toUpperCase();
             for (int i = 0; i < cmbUF.getItemCount(); i++) {
                 String item = cmbUF.getItemAt(i).trim().toUpperCase();
@@ -593,8 +582,6 @@ public class CadFornecedor extends javax.swing.JFrame {
                     break;
                 }
             }
-
-
         }
     }//GEN-LAST:event_lstFornecedorMouseClicked
 
@@ -611,7 +598,6 @@ public class CadFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-                
         Fornecedor f = new Fornecedor();
         f.setId(Integer.parseInt(txtID.getText()));
         f.setNome(txtNome.getText());
@@ -626,7 +612,6 @@ public class CadFornecedor extends javax.swing.JFrame {
         f.setNumero(Integer.parseInt(txtNumero.getText()));
         f.setComplemento(txtComplemento.getText());
         f.setTelefone(txtTelefone.getText());
-        
         FornecedorDAO fDAO = new FornecedorDAO();
         fDAO.atualizarFornecedor(f);
         Listar();

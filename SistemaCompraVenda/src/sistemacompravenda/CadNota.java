@@ -14,18 +14,13 @@ import javax.swing.JOptionPane;
  * @author sandy
  */
 public class CadNota extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadNota
-     */
     public CadNota() {
         initComponents();
         Listar();
         preencherComboFornecedores();
         preencherComboProdutos();
         txtID.setEditable(false);
-    }
-    
+    }    
     public void preencherComboFornecedores(){
         FornecedorDAO fDAO = new FornecedorDAO();
         List<Fornecedor> lista = fDAO.listarFornecedores();
@@ -46,8 +41,7 @@ public class CadNota extends javax.swing.JFrame {
         for(Produto p: lista){
             cmbProduto.addItem(p);
         }
-    }
-    
+    }    
     private void LimparForm(){
         txtID.setText("");
         txtData.setText("");
@@ -55,7 +49,6 @@ public class CadNota extends javax.swing.JFrame {
         cmbProduto.setSelectedIndex(0);
         cmbClienteFornecedor.setSelectedIndex(0);
     }
-    
     private void Listar(){
         NotaDAO nDAO = new NotaDAO();
         List<Nota> nota = nDAO.listarNota();
@@ -77,7 +70,6 @@ public class CadNota extends javax.swing.JFrame {
             preencherComboFornecedores();
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -344,7 +336,6 @@ public class CadNota extends javax.swing.JFrame {
             txtID.setText(String.valueOf(n.getId()));
             txtData.setText(n.getData());
             txtQnt.setText(String.valueOf(n.getQuantidade()));
-            
             Produto proCerto = null;
             for (int i = 0; i < cmbProduto.getItemCount(); i++) {
                 Produto p = (Produto) cmbProduto.getItemAt(i);
@@ -359,7 +350,6 @@ public class CadNota extends javax.swing.JFrame {
             if (n.getFornecedorId() != 0) {
                 cmbEntradaSaida.setSelectedItem("Entrada");
                 preencherComboFornecedores();
-
                 for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
                     Fornecedor f = (Fornecedor) cmbClienteFornecedor.getItemAt(i);
                     if (f.getId() == n.getFornecedorId()) {
@@ -370,8 +360,6 @@ public class CadNota extends javax.swing.JFrame {
             } else if (n.getClienteId() != 0) {
                 cmbEntradaSaida.setSelectedItem("Saída");
                 preencherComboClientes();
-
-                // Procura o cliente correspondente no combo
                 for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
                     Cliente c = (Cliente) cmbClienteFornecedor.getItemAt(i);
                     if (c.getId() == n.getClienteId()) {
