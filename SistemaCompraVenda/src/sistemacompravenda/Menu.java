@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package sistemacompravenda;
-
 /**
  *
  * @author 2830482411008
@@ -17,7 +16,6 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,28 +29,40 @@ public class Menu extends javax.swing.JFrame {
         btnCadProduto = new javax.swing.JButton();
         btnLancarNota = new javax.swing.JButton();
         btnCadFornecedor = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        menu = new javax.swing.JMenuBar();
+        menuMenu = new javax.swing.JMenu();
+        menuCliente = new javax.swing.JMenu();
+        menuFornecedor = new javax.swing.JMenu();
+        menuProduto = new javax.swing.JMenu();
+        menuNota = new javax.swing.JMenu();
+        menuNota1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
 
-        btnCadCliente.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadCliente.setBackground(new java.awt.Color(0, 153, 153));
+        btnCadCliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadCliente.setText("Cadastrar cliente");
+        btnCadCliente.setText("Cliente");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadClienteActionPerformed(evt);
             }
         });
 
-        btnCadProduto.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadProduto.setBackground(new java.awt.Color(0, 153, 153));
+        btnCadProduto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadProduto.setText("Cadastrar produto");
+        btnCadProduto.setText("Produto");
         btnCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadProdutoActionPerformed(evt);
             }
         });
 
-        btnLancarNota.setBackground(new java.awt.Color(0, 102, 102));
+        btnLancarNota.setBackground(new java.awt.Color(0, 153, 153));
+        btnLancarNota.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnLancarNota.setForeground(new java.awt.Color(255, 255, 255));
         btnLancarNota.setText("Lançar nota");
         btnLancarNota.addActionListener(new java.awt.event.ActionListener() {
@@ -61,43 +71,103 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnCadFornecedor.setBackground(new java.awt.Color(0, 102, 102));
+        btnCadFornecedor.setBackground(new java.awt.Color(0, 153, 153));
+        btnCadFornecedor.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadFornecedor.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadFornecedor.setText("Cadastrar fornecedor");
+        btnCadFornecedor.setText("Fornecedor");
         btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadFornecedorActionPerformed(evt);
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoMercado.png"))); // NOI18N
+
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+
+        menuMenu.setText("Menu");
+        menuMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuMenuMouseClicked(evt);
+            }
+        });
+        menu.add(menuMenu);
+
+        menuCliente.setText("Cliente");
+        menuCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuClienteMouseClicked(evt);
+            }
+        });
+        menu.add(menuCliente);
+
+        menuFornecedor.setText("Fornecedor");
+        menuFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFornecedorMouseClicked(evt);
+            }
+        });
+        menu.add(menuFornecedor);
+
+        menuProduto.setText("Produto");
+        menuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuProdutoMouseClicked(evt);
+            }
+        });
+        menu.add(menuProduto);
+
+        menuNota.setText("Nota fiscal");
+        menuNota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNotaMouseClicked(evt);
+            }
+        });
+        menu.add(menuNota);
+
+        menuNota1.setText("Nota fiscal");
+        menuNota1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNota1MouseClicked(evt);
+            }
+        });
+        menu.add(menuNota1);
+
+        setJMenuBar(menu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLancarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadProduto)
-                    .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLancarNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadCliente, btnCadProduto, btnLancarNota});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadProduto)
-                .addGap(18, 18, 18)
-                .addComponent(btnLancarNota)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLancarNota))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadProduto)
+                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadCliente, btnCadProduto, btnLancarNota});
@@ -132,6 +202,45 @@ public class Menu extends javax.swing.JFrame {
         tela.setLocationRelativeTo(null);
         this.dispose(); 
     }//GEN-LAST:event_btnLancarNotaActionPerformed
+
+    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
+        Menu tela = new Menu();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuMenuMouseClicked
+
+    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
+        CadCliente tela = new CadCliente();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuClienteMouseClicked
+
+    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
+        CadFornecedor tela = new CadFornecedor();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuFornecedorMouseClicked
+
+    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
+        CadProduto tela = new CadProduto();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuProdutoMouseClicked
+
+    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
+        CadNota tela = new CadNota();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuNotaMouseClicked
+
+    private void menuNota1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNota1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuNota1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,5 +282,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnCadFornecedor;
     private javax.swing.JButton btnCadProduto;
     private javax.swing.JButton btnLancarNota;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuCliente;
+    private javax.swing.JMenu menuFornecedor;
+    private javax.swing.JMenu menuMenu;
+    private javax.swing.JMenu menuNota;
+    private javax.swing.JMenu menuNota1;
+    private javax.swing.JMenu menuProduto;
     // End of variables declaration//GEN-END:variables
 }

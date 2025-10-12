@@ -13,8 +13,8 @@ public class Nota {
     int id;
     String data;
     int quantidade;
-    int clienteId;
-    int fornecedorId;
+    Integer clienteId;
+    Integer fornecedorId;
     int produtoId;
     
             @Override
@@ -46,19 +46,19 @@ public class Nota {
         this.quantidade = quantidade;
     }
 
-    public int getClienteId() {
+    public Integer getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(int clienteId) {
+    public void setClienteId(Integer clienteId) {
         this.clienteId = clienteId;
     }
 
-    public int getFornecedorId() {
+    public Integer getFornecedorId() {
         return fornecedorId;
     }
 
-    public void setFornecedorId(int fornecedorId) {
+    public void setFornecedorId(Integer fornecedorId) {
         this.fornecedorId = fornecedorId;
     }
 
@@ -69,6 +69,8 @@ public class Nota {
     public void setProdutoId(int produtoId) {
         this.produtoId = produtoId;
     }
+
+
     
     
     

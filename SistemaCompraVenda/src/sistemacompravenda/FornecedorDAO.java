@@ -46,7 +46,45 @@ public class FornecedorDAO {
             stmt.execute();
         }
         catch(SQLException ex){
-            System.out.println("Erro ao inserir pessoa: "+ex.getMessage());
+            System.out.println("Erro ao inserir fornecedor: "+ex.getMessage());
+        }
+    }
+    
+    public void atualizarFornecedor(Fornecedor f){
+    String sql = "UPDATE FORNECEDOR SET FORNECEDOR_NOME = ?, FORNECEDOR_EMAIL = ?, FORNECEDOR_NOME_FANTASIA = ?," +
+                    "  FORNECEDOR_CNPJ = ?, FORNECEDOR_ENDERECO_CIDADE = ?, FORNECEDOR_ENDERECO_CEP = ?, FORNECEDOR_ENDERECO_UF = ?," +
+                    "  FORNECEDOR_ENDERECO_RUA = ?, FORNECEDOR_ENDERECO_BAIRRO = ?, FORNECEDOR_ENDERECO_NUMERO = ?, FORNECEDOR_ENDERECO_COMPLEMENTO = ?," +
+                    "  FORNECEDOR_TELEFONE = ? WHERE FORNECEDOR_ID = ?;";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, f.getNome());
+            stmt.setString(2, f.getEmail());
+            stmt.setString(3, f.getNomeFantasia());
+            stmt.setString(4, f.getCnpj());
+            stmt.setString(5, f.getCidade());
+            stmt.setString(6, f.getCep());
+            stmt.setString(7, f.getUf());
+            stmt.setString(8, f.getRua());
+            stmt.setString(9, f.getBairro());
+            stmt.setInt(10, f.getNumero());
+            stmt.setString(11, f.getComplemento());
+            stmt.setString(12, f.getTelefone());
+            stmt.setInt(13, f.getId());
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao atualizar fornecedor: "+ex.getMessage());
+        }
+        
+    }
+    
+    public void excluirFornecedor(int id){
+        try{
+            String sql = "DELETE FROM FORNECEDOR WHERE FORNECEDOR_ID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao excluir fornecedor: "+ex.getMessage());
         }
     }
     
@@ -59,7 +97,7 @@ public class FornecedorDAO {
             
             while(rs.next()){
                 Fornecedor f = new Fornecedor();
-                
+                f.setId(rs.getInt("FORNECEDOR_ID"));
                 f.setNome(rs.getString("FORNECEDOR_NOME"));
                 f.setEmail(rs.getString("FORNECEDOR_EMAIL"));
                 f.setNomeFantasia(rs.getString("FORNECEDOR_NOME_FANTASIA"));

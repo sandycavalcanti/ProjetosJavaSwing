@@ -39,6 +39,35 @@ public class ProdutoDAO {
         }
     }
     
+    public void atualizarProduto(Produto p){
+        String sql = "UPDATE PRODUTO SET PRODUTO_NOME = ?, PRODUTO_DESCRICAO = ?, PRODUTO_PRECO = ?," +
+                    "  PRODUTO_QUANTIDADE = ?, FORNECEDOR_ID = ? WHERE PRODUTO_ID = ?;";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(sql);
+            stmt.setString(1, p.getNome());
+            stmt.setString(2, p.getDescricao());
+            stmt.setFloat(3, p.getPreco());
+            stmt.setInt(4, p.getQuantidade());
+            stmt.setInt(5, p.getFornecedorId());
+            stmt.setInt(6, p.getId());
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao atualizar produto: "+ex.getMessage());
+        }
+        
+    }
+    
+    public void excluirProduto(int id){
+        try{
+            String sql = "DELETE FROM PRODUTO WHERE PRODUTO_ID=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.execute();
+        }catch(SQLException ex){
+            System.out.println("Erro ao excluir produto: "+ex.getMessage());
+        }
+    }
+    
     public List<Produto> listaProdutos(){
         List<Produto> lista = new ArrayList<>();
         String sql = "SELECT * FROM PRODUTO";

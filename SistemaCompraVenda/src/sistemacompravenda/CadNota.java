@@ -7,6 +7,7 @@ package sistemacompravenda;
 
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,23 +20,24 @@ public class CadNota extends javax.swing.JFrame {
      */
     public CadNota() {
         initComponents();
-        preencherComboFornecedores();
+        Listar();
         preencherComboClientes();
         preencherComboProdutos();
+        txtID.setEditable(false);
     }
     
     public void preencherComboFornecedores(){
         FornecedorDAO fDAO = new FornecedorDAO();
         List<Fornecedor> lista = fDAO.listarFornecedores();
         for(Fornecedor f: lista){
-            cmbFornecedor.addItem(f);
+            cmbClienteFornecedor.addItem(f);
         }
     }
     public void preencherComboClientes(){
         ClienteDAO cDAO = new ClienteDAO();
         List<Cliente> lista = cDAO.listarClientes();
         for(Cliente c: lista){
-            cmbCliente.addItem(c);
+            cmbClienteFornecedor.addItem(c);
         }
     }
     public void preencherComboProdutos(){
@@ -51,8 +53,29 @@ public class CadNota extends javax.swing.JFrame {
         txtData.setText("");
         txtQnt.setText("");
         cmbProduto.setSelectedIndex(0);
-        cmbFornecedor.setSelectedIndex(0);
-        cmbCliente.setSelectedIndex(0);
+        cmbClienteFornecedor.setSelectedIndex(0);
+    }
+    
+    private void Listar(){
+        NotaDAO nDAO = new NotaDAO();
+        List<Nota> nota = nDAO.listarNota();
+
+        DefaultListModel<Nota> model = new DefaultListModel<>();
+        nota.forEach((n) -> {
+            model.addElement(n);
+        });
+        lstNota.setModel(model);
+    }
+    private void verificarEntradaSaida(){
+        if(cmbEntradaSaida.getSelectedItem().toString().equals("Saída")){
+            lblEntradaSaida.setText("Cliente:");
+            cmbClienteFornecedor.removeAllItems();
+            preencherComboClientes();
+        }else{
+            lblEntradaSaida.setText("Fornecedor:");
+            cmbClienteFornecedor.removeAllItems();
+            preencherComboFornecedores();
+        }
     }
 
     /**
@@ -64,7 +87,6 @@ public class CadNota extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gbtnTipo = new javax.swing.ButtonGroup();
         jLabel23 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -72,33 +94,31 @@ public class CadNota extends javax.swing.JFrame {
         txtQnt = new javax.swing.JTextField();
         txtData = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        cmbCliente = new javax.swing.JComboBox();
-        jLabel19 = new javax.swing.JLabel();
-        btnEntrada = new javax.swing.JRadioButton();
-        btnSaida = new javax.swing.JRadioButton();
+        cmbClienteFornecedor = new javax.swing.JComboBox();
+        lblEntradaSaida = new javax.swing.JLabel();
         cmbProduto = new javax.swing.JComboBox();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstNota = new javax.swing.JList<>();
-        btnListar = new javax.swing.JButton();
-        cmbFornecedor = new javax.swing.JComboBox();
-        jLabel21 = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        btnLancarProduto = new javax.swing.JButton();
-        btnCadFornecedor = new javax.swing.JButton();
-        btnMenu = new javax.swing.JButton();
-        btnCadCliente = new javax.swing.JButton();
+        cmbEntradaSaida = new javax.swing.JComboBox<>();
+        btnAtualizar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        menu = new javax.swing.JMenuBar();
+        menuMenu = new javax.swing.JMenu();
+        menuCliente = new javax.swing.JMenu();
+        menuFornecedor = new javax.swing.JMenu();
+        menuProduto = new javax.swing.JMenu();
+        menuNota = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel23.setFont(new java.awt.Font("Vladimir Script", 1, 48)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 204, 153));
+        jLabel23.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 48)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 153, 153));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("Nota");
 
-        txtID.setBackground(new java.awt.Color(153, 255, 204));
         txtID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
@@ -109,7 +129,6 @@ public class CadNota extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Quantidade:");
 
-        txtQnt.setBackground(new java.awt.Color(153, 255, 204));
         txtQnt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtQnt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,68 +136,31 @@ public class CadNota extends javax.swing.JFrame {
             }
         });
 
-        txtData.setBackground(new java.awt.Color(153, 255, 204));
         txtData.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel24.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(102, 102, 102));
         jLabel24.setText("ID:");
 
-        jLabel18.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel18.setText("Listar notas:");
+        cmbClienteFornecedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        cmbCliente.setBackground(new java.awt.Color(153, 255, 204));
-        cmbCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblEntradaSaida.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        lblEntradaSaida.setForeground(new java.awt.Color(102, 102, 102));
+        lblEntradaSaida.setText("Cliente:");
 
-        jLabel19.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel19.setText("Cliente:");
-
-        gbtnTipo.add(btnEntrada);
-        btnEntrada.setForeground(new java.awt.Color(102, 102, 102));
-        btnEntrada.setText("Entrada");
-        btnEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntradaActionPerformed(evt);
-            }
-        });
-
-        gbtnTipo.add(btnSaida);
-        btnSaida.setForeground(new java.awt.Color(102, 102, 102));
-        btnSaida.setText("Saída");
-
-        cmbProduto.setBackground(new java.awt.Color(153, 255, 204));
         cmbProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(102, 102, 102));
         jLabel20.setText("Produto:");
 
-        lstNota.setBackground(new java.awt.Color(153, 255, 204));
+        lstNota.setForeground(new java.awt.Color(102, 102, 102));
         lstNota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lstNotaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(lstNota);
-
-        btnListar.setBackground(new java.awt.Color(0, 153, 153));
-        btnListar.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
-        btnListar.setForeground(new java.awt.Color(255, 255, 255));
-        btnListar.setText("Listar");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
-            }
-        });
-
-        cmbFornecedor.setBackground(new java.awt.Color(153, 255, 204));
-        cmbFornecedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel21.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel21.setText("Fornecedor");
 
         btnLimpar.setBackground(new java.awt.Color(0, 153, 153));
         btnLimpar.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
@@ -200,119 +182,126 @@ public class CadNota extends javax.swing.JFrame {
             }
         });
 
-        btnLancarProduto.setBackground(new java.awt.Color(0, 102, 102));
-        btnLancarProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnLancarProduto.setText("Cadastrar produto");
-        btnLancarProduto.addActionListener(new java.awt.event.ActionListener() {
+        cmbEntradaSaida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbEntradaSaida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrada", "Saída" }));
+        cmbEntradaSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLancarProdutoActionPerformed(evt);
+                cmbEntradaSaidaActionPerformed(evt);
             }
         });
 
-        btnCadFornecedor.setBackground(new java.awt.Color(0, 102, 102));
-        btnCadFornecedor.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadFornecedor.setText("Cadastrar fornecedor");
-        btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setBackground(new java.awt.Color(0, 153, 153));
+        btnAtualizar.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadFornecedorActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
-        btnMenu.setBackground(new java.awt.Color(0, 102, 102));
-        btnMenu.setForeground(new java.awt.Color(255, 255, 255));
-        btnMenu.setText("Menu");
-        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(255, 153, 153));
+        btnExcluir.setFont(new java.awt.Font("Tw Cen MT", 1, 18)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        btnCadCliente.setBackground(new java.awt.Color(0, 102, 102));
-        btnCadCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadCliente.setText("Cadastrar cliente");
-        btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadClienteActionPerformed(evt);
+        menuMenu.setText("Menu");
+        menuMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuMenuMouseClicked(evt);
             }
         });
+        menu.add(menuMenu);
+
+        menuCliente.setText("Cliente");
+        menuCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuClienteMouseClicked(evt);
+            }
+        });
+        menu.add(menuCliente);
+
+        menuFornecedor.setText("Fornecedor");
+        menuFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFornecedorMouseClicked(evt);
+            }
+        });
+        menu.add(menuFornecedor);
+
+        menuProduto.setText("Produto");
+        menuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuProdutoMouseClicked(evt);
+            }
+        });
+        menu.add(menuProduto);
+
+        menuNota.setText("Nota fiscal");
+        menuNota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNotaMouseClicked(evt);
+            }
+        });
+        menu.add(menuNota);
+
+        setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnCadFornecedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLancarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel19)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel24)
-                            .addGap(10, 10, 10)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel16)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel17)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtQnt, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel20)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnSaida)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnEntrada))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel21)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblEntradaSaida)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbClienteFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAtualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtQnt, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEntradaSaida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
-                .addGap(32, 32, 32))
-            .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCadCliente, btnCadFornecedor, btnLancarProduto, btnMenu});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadCliente)
-                    .addComponent(btnLancarProduto)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel23)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
@@ -325,25 +314,20 @@ public class CadNota extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20)
-                            .addComponent(btnSaida)
-                            .addComponent(btnEntrada))
-                        .addGap(26, 26, 26)
+                            .addComponent(cmbEntradaSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21))))
-                .addGap(18, 18, 18)
+                            .addComponent(cmbClienteFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEntradaSaida)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCadCliente, btnCadFornecedor, btnLancarProduto, btnMenu});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -352,28 +336,52 @@ public class CadNota extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQntActionPerformed
 
-    private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEntradaActionPerformed
-
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        NotaDAO nDAO = new NotaDAO();
-        List<Nota> nota = nDAO.listarNota();
-
-        DefaultListModel<Nota> model = new DefaultListModel<>();
-        nota.forEach((n) -> {
-            model.addElement(n);
-        });
-        lstNota.setModel(model);
-    }//GEN-LAST:event_btnListarActionPerformed
-
     private void lstNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstNotaMouseClicked
-        Nota n = lstNota.getSelectedValue();
-        if(n != null){
+         Nota n = lstNota.getSelectedValue();
+        if (n != null) {
             txtID.setText(String.valueOf(n.getId()));
             txtData.setText(n.getData());
             txtQnt.setText(String.valueOf(n.getQuantidade()));
-        
+            
+            Produto proCerto = null;
+            for (int i = 0; i < cmbProduto.getItemCount(); i++) {
+                Produto p = (Produto) cmbProduto.getItemAt(i);
+                if (p.getId() == n.getFornecedorId()) {
+                    proCerto = p;
+                    break;
+                }
+            }
+            if (proCerto != null) {
+                cmbProduto.setSelectedItem(proCerto);
+            }
+
+            
+            // --- Verifica se é nota de ENTRADA (tem fornecedor) ou SAÍDA (tem cliente) ---
+            if (n.getFornecedorId() != 0) {
+                cmbEntradaSaida.setSelectedItem("Entrada");
+                preencherComboFornecedores(); // <-- recarrega o combo corretamente
+
+                // Procura o fornecedor correspondente no combo
+                for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
+                    Fornecedor f = (Fornecedor) cmbClienteFornecedor.getItemAt(i);
+                    if (f.getId() == n.getFornecedorId()) {
+                        cmbClienteFornecedor.setSelectedItem(f);
+                        break;
+                    }
+                }
+            } else if (n.getClienteId() != 0) {
+                cmbEntradaSaida.setSelectedItem("Saída");
+                preencherComboClientes(); // <-- recarrega o combo corretamente
+
+                // Procura o cliente correspondente no combo
+                for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
+                    Cliente c = (Cliente) cmbClienteFornecedor.getItemAt(i);
+                    if (c.getId() == n.getClienteId()) {
+                        cmbClienteFornecedor.setSelectedItem(c);
+                        break;
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_lstNotaMouseClicked
 
@@ -382,36 +390,100 @@ public class CadNota extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
+        Produto p = (Produto) cmbProduto.getSelectedItem();
+        Nota n = new Nota();
+        n.setData(txtData.getText());
+        n.setQuantidade(Integer.parseInt(txtQnt.getText()));
+        n.setProdutoId(p.getId());
+        if(cmbEntradaSaida.getSelectedItem().equals("Saída")){
+            Cliente c = (Cliente) cmbClienteFornecedor.getSelectedItem();
+            n.setClienteId(c.getId());
+            n.setFornecedorId(null);
+            
+        }else{
+            Fornecedor f = (Fornecedor) cmbClienteFornecedor.getSelectedItem();
+            n.setClienteId(null);
+            n.setFornecedorId(f.getId());
+        }
+        NotaDAO nDAO = new NotaDAO();
+        nDAO.inserirNota(n);
+        LimparForm();
+        Listar();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnLancarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLancarProdutoActionPerformed
-        CadProduto tela = new CadProduto();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnLancarProdutoActionPerformed
-
-    private void btnCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFornecedorActionPerformed
-        CadFornecedor tela = new CadFornecedor();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnCadFornecedorActionPerformed
-
-    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
         Menu tela = new Menu();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnMenuActionPerformed
+    }//GEN-LAST:event_menuMenuMouseClicked
 
-    private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
         CadCliente tela = new CadCliente();
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnCadClienteActionPerformed
+    }//GEN-LAST:event_menuClienteMouseClicked
+
+    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
+        CadFornecedor tela = new CadFornecedor();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuFornecedorMouseClicked
+
+    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
+        CadProduto tela = new CadProduto();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuProdutoMouseClicked
+
+    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
+        CadNota tela = new CadNota();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuNotaMouseClicked
+
+    private void cmbEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEntradaSaidaActionPerformed
+        verificarEntradaSaida();
+    }//GEN-LAST:event_cmbEntradaSaidaActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        Produto p = (Produto) cmbProduto.getSelectedItem();
+        Nota n = new Nota();
+        n.setId(Integer.parseInt(txtID.getText()));
+        n.setData(txtData.getText());
+        n.setQuantidade(Integer.parseInt(txtQnt.getText()));
+        n.setProdutoId(p.getId());
+        if(cmbEntradaSaida.getSelectedItem().equals("Saída")){
+            Cliente c = (Cliente) cmbClienteFornecedor.getSelectedItem();
+            n.setClienteId(c.getId());
+            n.setFornecedorId(null);
+            
+        }else{
+            Fornecedor f = (Fornecedor) cmbClienteFornecedor.getSelectedItem();
+            n.setClienteId(null);
+            n.setFornecedorId(f.getId());
+        }
+        NotaDAO nDAO = new NotaDAO();
+        nDAO.atualizarNota(n);
+        LimparForm();
+        Listar();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir essa nota?",
+            "Exclusão", JOptionPane.YES_NO_OPTION);
+        if(resposta == JOptionPane.YES_OPTION){
+            NotaDAO nDAO = new NotaDAO();
+            nDAO.excluirNota(Integer.parseInt(txtID.getText()));
+            JOptionPane.showMessageDialog(null, "Nota excluida!");
+            LimparForm();
+            Listar();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,29 +521,27 @@ public class CadNota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadCliente;
-    private javax.swing.JButton btnCadFornecedor;
-    private javax.swing.JRadioButton btnEntrada;
-    private javax.swing.JButton btnLancarProduto;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnListar;
-    private javax.swing.JButton btnMenu;
-    private javax.swing.JRadioButton btnSaida;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox cmbCliente;
-    private javax.swing.JComboBox cmbFornecedor;
+    private javax.swing.JComboBox cmbClienteFornecedor;
+    private javax.swing.JComboBox<String> cmbEntradaSaida;
     private javax.swing.JComboBox cmbProduto;
-    private javax.swing.ButtonGroup gbtnTipo;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEntradaSaida;
     private javax.swing.JList<Nota> lstNota;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuCliente;
+    private javax.swing.JMenu menuFornecedor;
+    private javax.swing.JMenu menuMenu;
+    private javax.swing.JMenu menuNota;
+    private javax.swing.JMenu menuProduto;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtQnt;
