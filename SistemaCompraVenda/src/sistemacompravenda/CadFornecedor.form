@@ -252,6 +252,11 @@
       </Properties>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="menu">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menuMenu">
           <Properties>
@@ -279,7 +284,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuProduto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Produto"/>
+            <Property name="text" type="java.lang.String" value="Produtos"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuProdutoMouseClicked"/>
@@ -287,7 +292,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuNota">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nota fiscal"/>
+            <Property name="text" type="java.lang.String" value="Notas fiscais"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuNotaMouseClicked"/>

@@ -21,7 +21,7 @@ public class CadNota extends javax.swing.JFrame {
     public CadNota() {
         initComponents();
         Listar();
-        preencherComboClientes();
+        preencherComboFornecedores();
         preencherComboProdutos();
         txtID.setEditable(false);
     }
@@ -146,7 +146,7 @@ public class CadNota extends javax.swing.JFrame {
 
         lblEntradaSaida.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         lblEntradaSaida.setForeground(new java.awt.Color(102, 102, 102));
-        lblEntradaSaida.setText("Cliente:");
+        lblEntradaSaida.setText("Fornecedor:");
 
         cmbProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -210,6 +210,8 @@ public class CadNota extends javax.swing.JFrame {
             }
         });
 
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+
         menuMenu.setText("Menu");
         menuMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,7 +236,7 @@ public class CadNota extends javax.swing.JFrame {
         });
         menu.add(menuFornecedor);
 
-        menuProduto.setText("Produto");
+        menuProduto.setText("Produtos");
         menuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuProdutoMouseClicked(evt);
@@ -242,7 +244,7 @@ public class CadNota extends javax.swing.JFrame {
         });
         menu.add(menuProduto);
 
-        menuNota.setText("Nota fiscal");
+        menuNota.setText("Notas fiscais");
         menuNota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuNotaMouseClicked(evt);
@@ -354,14 +356,10 @@ public class CadNota extends javax.swing.JFrame {
             if (proCerto != null) {
                 cmbProduto.setSelectedItem(proCerto);
             }
-
-            
-            // --- Verifica se é nota de ENTRADA (tem fornecedor) ou SAÍDA (tem cliente) ---
             if (n.getFornecedorId() != 0) {
                 cmbEntradaSaida.setSelectedItem("Entrada");
-                preencherComboFornecedores(); // <-- recarrega o combo corretamente
+                preencherComboFornecedores();
 
-                // Procura o fornecedor correspondente no combo
                 for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
                     Fornecedor f = (Fornecedor) cmbClienteFornecedor.getItemAt(i);
                     if (f.getId() == n.getFornecedorId()) {
@@ -371,7 +369,7 @@ public class CadNota extends javax.swing.JFrame {
                 }
             } else if (n.getClienteId() != 0) {
                 cmbEntradaSaida.setSelectedItem("Saída");
-                preencherComboClientes(); // <-- recarrega o combo corretamente
+                preencherComboClientes();
 
                 // Procura o cliente correspondente no combo
                 for (int i = 0; i < cmbClienteFornecedor.getItemCount(); i++) {
@@ -411,41 +409,6 @@ public class CadNota extends javax.swing.JFrame {
         Listar();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
-        Menu tela = new Menu();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuMenuMouseClicked
-
-    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
-        CadCliente tela = new CadCliente();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuClienteMouseClicked
-
-    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
-        CadFornecedor tela = new CadFornecedor();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuFornecedorMouseClicked
-
-    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
-        CadProduto tela = new CadProduto();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuProdutoMouseClicked
-
-    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
-        CadNota tela = new CadNota();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuNotaMouseClicked
-
     private void cmbEntradaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEntradaSaidaActionPerformed
         verificarEntradaSaida();
     }//GEN-LAST:event_cmbEntradaSaidaActionPerformed
@@ -484,6 +447,41 @@ public class CadNota extends javax.swing.JFrame {
             Listar();
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
+        Menu tela = new Menu();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuMenuMouseClicked
+
+    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
+        CadCliente tela = new CadCliente();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuClienteMouseClicked
+
+    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
+        CadFornecedor tela = new CadFornecedor();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuFornecedorMouseClicked
+
+    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
+        CadProduto tela = new CadProduto();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuProdutoMouseClicked
+
+    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
+        CadNota tela = new CadNota();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuNotaMouseClicked
 
     /**
      * @param args the command line arguments

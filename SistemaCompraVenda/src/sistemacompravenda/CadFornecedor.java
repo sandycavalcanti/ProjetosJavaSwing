@@ -356,6 +356,8 @@ public class CadFornecedor extends javax.swing.JFrame {
             }
         });
 
+        menu.setBackground(new java.awt.Color(255, 255, 255));
+
         menuMenu.setText("Menu");
         menuMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -380,7 +382,7 @@ public class CadFornecedor extends javax.swing.JFrame {
         });
         menu.add(menuFornecedor);
 
-        menuProduto.setText("Produto");
+        menuProduto.setText("Produtos");
         menuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuProdutoMouseClicked(evt);
@@ -388,7 +390,7 @@ public class CadFornecedor extends javax.swing.JFrame {
         });
         menu.add(menuProduto);
 
-        menuNota.setText("Nota fiscal");
+        menuNota.setText("Notas fiscais");
         menuNota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuNotaMouseClicked(evt);
@@ -596,41 +598,6 @@ public class CadFornecedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lstFornecedorMouseClicked
 
-    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
-        Menu tela = new Menu();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuMenuMouseClicked
-
-    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
-        CadCliente tela = new CadCliente();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuClienteMouseClicked
-
-    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
-        CadFornecedor tela = new CadFornecedor();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuFornecedorMouseClicked
-
-    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
-        CadProduto tela = new CadProduto();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuProdutoMouseClicked
-
-    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
-        CadNota tela = new CadNota();
-        tela.setVisible(true);
-        tela.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_menuNotaMouseClicked
-
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir esse fornecedor?",
                                                     "Exclusão", JOptionPane.YES_NO_OPTION);
@@ -665,6 +632,41 @@ public class CadFornecedor extends javax.swing.JFrame {
         Listar();
         LimparForm();
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void menuMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMenuMouseClicked
+        Menu tela = new Menu();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuMenuMouseClicked
+
+    private void menuClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClienteMouseClicked
+        CadCliente tela = new CadCliente();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuClienteMouseClicked
+
+    private void menuFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedorMouseClicked
+        CadFornecedor tela = new CadFornecedor();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuFornecedorMouseClicked
+
+    private void menuProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuProdutoMouseClicked
+        CadProduto tela = new CadProduto();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuProdutoMouseClicked
+
+    private void menuNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNotaMouseClicked
+        CadNota tela = new CadNota();
+        tela.setVisible(true);
+        tela.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_menuNotaMouseClicked
 
     /**
      * @param args the command line arguments

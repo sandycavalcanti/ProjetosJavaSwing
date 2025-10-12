@@ -36,7 +36,6 @@ public class Menu extends javax.swing.JFrame {
         menuFornecedor = new javax.swing.JMenu();
         menuProduto = new javax.swing.JMenu();
         menuNota = new javax.swing.JMenu();
-        menuNota1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 255, 204));
@@ -44,7 +43,7 @@ public class Menu extends javax.swing.JFrame {
         btnCadCliente.setBackground(new java.awt.Color(0, 153, 153));
         btnCadCliente.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadCliente.setText("Cliente");
+        btnCadCliente.setText("Clientes");
         btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadClienteActionPerformed(evt);
@@ -54,7 +53,7 @@ public class Menu extends javax.swing.JFrame {
         btnCadProduto.setBackground(new java.awt.Color(0, 153, 153));
         btnCadProduto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadProduto.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadProduto.setText("Produto");
+        btnCadProduto.setText("Produtos");
         btnCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadProdutoActionPerformed(evt);
@@ -74,7 +73,7 @@ public class Menu extends javax.swing.JFrame {
         btnCadFornecedor.setBackground(new java.awt.Color(0, 153, 153));
         btnCadFornecedor.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnCadFornecedor.setForeground(new java.awt.Color(255, 255, 255));
-        btnCadFornecedor.setText("Fornecedor");
+        btnCadFornecedor.setText("Fornecedores");
         btnCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadFornecedorActionPerformed(evt);
@@ -109,7 +108,7 @@ public class Menu extends javax.swing.JFrame {
         });
         menu.add(menuFornecedor);
 
-        menuProduto.setText("Produto");
+        menuProduto.setText("Produtos");
         menuProduto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuProdutoMouseClicked(evt);
@@ -117,21 +116,13 @@ public class Menu extends javax.swing.JFrame {
         });
         menu.add(menuProduto);
 
-        menuNota.setText("Nota fiscal");
+        menuNota.setText("Notas fiscais");
         menuNota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuNotaMouseClicked(evt);
             }
         });
         menu.add(menuNota);
-
-        menuNota1.setText("Nota fiscal");
-        menuNota1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuNota1MouseClicked(evt);
-            }
-        });
-        menu.add(menuNota1);
 
         setJMenuBar(menu);
 
@@ -238,10 +229,6 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menuNotaMouseClicked
 
-    private void menuNota1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNota1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuNota1MouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -288,7 +275,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu menuFornecedor;
     private javax.swing.JMenu menuMenu;
     private javax.swing.JMenu menuNota;
-    private javax.swing.JMenu menuNota1;
     private javax.swing.JMenu menuProduto;
     // End of variables declaration//GEN-END:variables
 }
