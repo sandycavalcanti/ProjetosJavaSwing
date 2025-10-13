@@ -1,6 +1,5 @@
 package sistemacompravenda;
 
-import com.mysql.cj.xdevapi.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
